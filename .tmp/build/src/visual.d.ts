@@ -1,0 +1,32 @@
+import "core-js/stable";
+import "./../style/visual.less";
+import powerbi from "powerbi-visuals-api";
+import VisualConstructorOptions = powerbi.extensibility.visual.VisualConstructorOptions;
+import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
+import IVisual = powerbi.extensibility.visual.IVisual;
+import { VisualSettings } from "./settings";
+import VisualObjectInstanceEnumeration = powerbi.VisualObjectInstanceEnumeration;
+import EnumerateVisualObjectInstancesOptions = powerbi.EnumerateVisualObjectInstancesOptions;
+export declare class Visual implements IVisual {
+    visualSettings: VisualSettings;
+    private host;
+    private svg;
+    private container;
+    private textValue1;
+    private textLabel1;
+    private textValue2;
+    private textLabel2;
+    private textValue3;
+    private textLabel3;
+    private textValue4;
+    private textLabel4;
+    private textValueOpen;
+    private textValueAckn;
+    private box1;
+    private box2;
+    private box3;
+    private box4;
+    constructor(options: VisualConstructorOptions);
+    enumerateObjectInstances(options: EnumerateVisualObjectInstancesOptions): VisualObjectInstanceEnumeration;
+    update(options: VisualUpdateOptions): void;
+}

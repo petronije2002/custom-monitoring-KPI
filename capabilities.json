@@ -1,0 +1,247 @@
+{
+    "dataRoles": [
+
+        {
+            "displayName": "Company",
+            "name": "Company",
+            "kind": "Grouping"
+        },
+       
+
+       
+        {
+            "displayName": "Critical Open Events",
+            "name": "Cdk",
+            "kind": "Measure"
+        },
+        {
+            "displayName": "Major Open Events",
+            "name": "Pwm",
+            "kind": "Measure"
+        },
+        {
+            "displayName": "Critical Ackn. Events",
+            "name": "Opn",
+            "kind": "Measure"
+        },
+        {
+            "displayName": "Major Ackn. Events",
+            "name": "Cls",
+            "kind": "Measure"
+        }
+       
+       
+       
+    ],
+
+    "objects": {
+        "circle": {
+            "displayName": "Background Colors",
+            "properties": {
+                "openBackgroundColor": {
+                    "displayName": "Open Cases Background Color",
+                    "description": "The fill color of the circle.",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "ClosedBackgroundColor": {
+                    "displayName": "Closed Cases Backg Color",
+                    "description": "The fill color of the circle.",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "AcknBackgroundColor": {
+                    "displayName": "Ackn. Cases Backg Color",
+                    "description": "The fill color of the circle.",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "CriticalBackgroundColor": {
+                    "displayName": "Crit. Cases Backg Color",
+                    "description": "The fill color of the circle.",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "CornerRadius": {
+                    "displayName": "Corner Radius",
+                    "description": "Set the radius corner",
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "FontValueSize": {
+                    "displayName": "FontValueSize",
+                    "description": "Set size of values",
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "FontValueColor": {
+                    "displayName": "Font Color",
+                    "description": "Font Color",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "fontFamily": {
+                    "displayName": "Font family",
+                    "type": {
+                        "enumeration": [
+                            {
+                                "displayName": "Default",
+                                "description": "helvetica, arial, sans-serif",
+                                "value": "helvetica, arial, sans-serif"
+                            },
+                            {
+                                "displayName": "Arial",
+                                "value": "Arial"
+                            },
+                            {
+                                "displayName": "Arial Black",
+                                "value": "\"Arial Black\""
+                            },
+                            {
+                                "displayName": "Arial Unicode MS",
+                                "value": "\"Arial Unicode MS\""
+                            },
+                            {
+                                "displayName": "Calibri",
+                                "value": "Calibri"
+                            },
+                            {
+                                "displayName": "Cambria",
+                                "value": "Cambria"
+                            },
+                            {
+                                "displayName": "Cambria Math",
+                                "value": "\"Cambria Math\""
+                            },
+                            {
+                                "displayName": "Candara",
+                                "value": "Candara"
+                            },
+                            {
+                                "displayName": "Comic Sans MS",
+                                "value": "\"Comic Sans MS\""
+                            },
+                            {
+                                "displayName": "Consolas",
+                                "value": "Consolas"
+                            },
+                            {
+                                "displayName": "Constantia",
+                                "value": "Constantia"
+                            },
+                            {
+                                "displayName": "Corbel",
+                                "value": "Corbel"
+                            },
+                            {
+                                "displayName": "Courier New",
+                                "value": "\"Courier New\""
+                            },
+                            {
+                                "displayName": "Georgia",
+                                "value": "Georgia"
+                            },
+                            {
+                                "displayName": "Lucida Sans Unicode",
+                                "value": "\"Lucida Sans Unicode\""
+                            },
+                            {
+                                "displayName": "Segoe (Bold)",
+                                "value": "\"Segoe UI Bold\", wf_segoe-ui_bold, helvetica, arial, sans-serif"
+                            },
+                            {
+                                "displayName": "Segoe UI",
+                                "value": "\"Segoe UI\", wf_segoe-ui_normal, helvetica, arial, sans-serif"
+                            },
+                            {
+                                "displayName": "Segoe UI Light",
+                                "value": "\"Segoe UI Light\", wf_segoe-ui_bold, helvetica, arial, sans-serif"
+                            },
+                            {
+                                "displayName": "Symbol",
+                                "value": "Symbol"
+                            },
+                            {
+                                "displayName": "Tahoma",
+                                "value": "Tahoma"
+                            },
+                            {
+                                "displayName": "Times New Roman",
+                                "value": "\"Times New Roman\""
+                            },
+                            {
+                                "displayName": "Trebuchet MS",
+                                "value": "\"Trebuchet MS\""
+                            },
+                            {
+                                "displayName": "Verdana",
+                                "value": "Verdana"
+                            },
+                            {
+                                "displayName": "Wingdings",
+                                "value": "Wingdings"
+                            }
+                        ]
+                    }
+                }
+
+            
+                
+
+
+            }
+        }
+    },
+
+    "dataViewMappings": [
+        
+       
+        {
+            "conditions": [ { "Company": { "max": 1 }, "Cdk": { "max": 1 } ,"Pwm": { "max": 1 } ,"Opn": { "max": 1 },"Cls": { "max": 1 } }],
+           
+            "categorical": {
+                "categories": {
+                    "for": { "in": "Company" }
+                },
+                "values": {
+                    "group": {"by": "Company",
+                        "select": [
+                            { "bind": { "to": "Cdk" } },
+                            { "bind": { "to": "Pwm" } },
+                            { "bind": { "to": "Opn" } },
+                            { "bind": { "to": "Cls" } }
+                        ]
+                    }
+                }
+            }
+        }
+       
+    ]
+}

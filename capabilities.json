@@ -82,6 +82,8 @@
                         }
                     }
                 },
+
+                
                 "CornerRadius": {
                     "displayName": "Corner Radius",
                     "description": "Set the radius corner",

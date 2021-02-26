@@ -40,7 +40,7 @@ export class CircleSettings {
   public FontValueSize: number = 16;
   public FontValueColor: string = "black";
   public fontFamily: string = "\"Segoe UI\", wf_segoe-ui_normal, helvetica, arial, sans-serif"
-
+  public CompanyFontSize: number = 20;
 } 
 
 

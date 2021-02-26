@@ -72,6 +72,8 @@ export class Visual implements IVisual {
     private textValue4: Selection<SVGElement>;
     private textLabel4: Selection<SVGElement>;
 
+    private orgName: Selection<SVGElement>;
+
     private textValueOpen: Selection<SVGElement>;
     private textValueAckn: Selection<SVGElement>;
 
@@ -125,6 +127,8 @@ export class Visual implements IVisual {
             .classed("textValue2", true);
         this.textLabel4 = this.container.append("text")
             .classed("textLabel2", true);
+
+        this.orgName = this.container.append("text").classed("orgName",true)
         
     }
 
@@ -148,39 +152,46 @@ export class Visual implements IVisual {
         // this.visualSettings.colors.circleThickness = Math.max(0, this.visualSettings.circle.circleThickness);
         // this.visualSettings.circle.circleThickness = Math.min(10, this.visualSettings.circle.circleThickness);
 
-
-        this.visualSettings = VisualSettings.parse<VisualSettings>(dataView1);
-
-
-        let width: number = options.viewport.width;
-        let height: number = options.viewport.height;
-        this.svg.attr("width", width);
-        this.svg.attr("height", height);
         
-        this.box1.attr("width", (width -30)/2 )
-        .attr("height",(height -30)/2)
-        .attr("x",10).attr("y",10)
+        this.visualSettings = VisualSettings.parse<VisualSettings>(dataView1);
+        let parmeterH = options.viewport.height/4
+        let parmeterW = options.viewport.width/8
+
+
+        let width: number = options.viewport.width - parmeterW;
+        let height: number = options.viewport.height  - parmeterH;
+
+        this.svg.attr("width", options.viewport.width);
+        this.svg.attr("height", options.viewport.height);
+        
+        this.box1.attr("width", width/2 )
+        .attr("height",height/2)
+        .attr("x", parmeterW/3)
+        .attr("y", parmeterH/2)
         .attr("rx",this.visualSettings.circle.CornerRadius)
         .attr("ry",this.visualSettings.circle.CornerRadius)
         .style("fill",this.visualSettings.circle.openBackgroundColor).style("fill-opacity","1")
 
-        this.box2.attr("width", (width -30)/2 )
-        .attr("height",(height -30)/2)
-        .attr("x",10 +(width -30)/2 +10).attr("y",10)
+        this.box2.attr("width", width/2 )
+        .attr("height",height/2)
+        .attr("x",width/2 + 2*parmeterW/3)
+        .attr("y",parmeterH/2)
         .attr("rx",this.visualSettings.circle.CornerRadius)
         .attr("ry",this.visualSettings.circle.CornerRadius)
         .style("fill",this.visualSettings.circle.ClosedBackgroundColor).style("fill-opacity","1")
 
-        this.box3.attr("width", (width -30)/2 )
-        .attr("height",(height -30)/2)
-        .attr("x",10).attr("y",10+(height-30)/2 +10)
+        this.box3.attr("width", width/2  )
+        .attr("height",height/2 )
+        .attr("x",parmeterW/3)
+        .attr("y",height/2 + 2*parmeterH/3)
         .attr("rx",this.visualSettings.circle.CornerRadius)
         .attr("ry",this.visualSettings.circle.CornerRadius)
         .style("fill",this.visualSettings.circle.AcknBackgroundColor).style("fill-opacity","1")
 
-        this.box4.attr("width", (width -30)/2 )
-        .attr("height",(height -30)/2)
-        .attr("x",10 +(width -30)/2 +10).attr("y",10+(height-30)/2 +10)
+        this.box4.attr("width", width/2  )
+        .attr("height",height/2)
+        .attr("x",width/2 + 2*parmeterW/3)
+        .attr("y",height/2 + 2*parmeterH/3)
         .attr("rx",this.visualSettings.circle.CornerRadius)
         .attr("ry",this.visualSettings.circle.CornerRadius)
         .style("fill",this.visualSettings.circle.CriticalBackgroundColor).style("fill-opacity","1")
@@ -192,37 +203,17 @@ export class Visual implements IVisual {
         
         this.textValue1
             .text(<string>Math.round(Number(dataView1.categorical.values[0].values.reduce((a,b)=>{return Number(a)+Number(b)}))).toString())
-            .attr("x", (10 +(width -30)/2)/2 +"px")
-            .attr("y", ((height -30)/2)/2 + this.visualSettings.circle.FontValueSize/2 +"px")
+            .attr("x", parmeterW/3 + width/4 )
+            .attr("y", parmeterH/2 + height/4 +  this.visualSettings.circle.FontValueSize/2)
             .attr("text-anchor", "middle")
             .style("font-size", this.visualSettings.circle.FontValueSize)
             .style("fill", this.visualSettings.circle.FontValueColor)
             .style("font-family", this.visualSettings.circle.fontFamily)
-
-        // this.textLabel1
-        //     .text("Open")
-        //     .attr("x", 20 +"px")
-        //     .attr("y",10  + "px")
-        //     .attr("dy", fontSizeValue / 1.1)
-        //     .style("writing-mode", "tb")
-        //     .style("glyph-orientation-vertical", "90")
-        //     .style("fill", "white")
-        //     .style("font-size", fontSizeLabel*2 + "px");
-        
-        // this.textLabel2
-        //     .text("Ackn")
-        //     .attr("x", 20 +"px")
-        //     .attr("y",10 + 10+ (height-30)/2 + "px")
-        //     .attr("dy", fontSizeValue / 1.1)
-        //     .style("writing-mode", "tb")
-        //     .style("glyph-orientation-vertical", "90")
-        //     .style("fill", "white")
-        //     .style("font-size", fontSizeLabel*2 + "px");
             
         this.textValue2
             .text(<string>dataView1.categorical.values[1].values.reduce((a,b)=>{return Number(a)+Number(b)}).toString())
-            .attr("x", 10 + (width -30)/2+  (width -30)/4+ 10 +"px")
-            .attr("y", ((height -30)/2)/2 + this.visualSettings.circle.FontValueSize/2 +"px")
+            .attr("x", 2*parmeterW/3 + 3/4*width )
+            .attr("y", parmeterH/2 + height/4 +  this.visualSettings.circle.FontValueSize/2)
             .attr("text-anchor", "middle")
             .style("font-size",this.visualSettings.circle.FontValueSize)
             .style("fill", this.visualSettings.circle.FontValueColor)
@@ -230,8 +221,8 @@ export class Visual implements IVisual {
 
         this.textValue3
             .text(<string>dataView1.categorical.values[2].values.reduce((a,b)=>{return Number(a)+Number(b)}).toString())
-            .attr("x", (10 +(width -30)/2)/2 +"px")
-            .attr("y", (height -30)/2 + 10 + (height -30)/4 +this.visualSettings.circle.FontValueSize/2+ "px")
+            .attr("x", parmeterW/3 + width/4)
+            .attr("y", 3*height/4  + 2*parmeterH/3 +   this.visualSettings.circle.FontValueSize/2)
             .attr("text-anchor", "middle")
             .style("font-size", this.visualSettings.circle.FontValueSize)
             .style("fill", this.visualSettings.circle.FontValueColor)
@@ -239,12 +230,20 @@ export class Visual implements IVisual {
 
         this.textValue4
             .text(<string>Math.round(Number(dataView1.categorical.values[3].values.reduce((a,b)=>{return Number(a)+Number(b)}))).toString())
-            .attr("x", 10 + (width -30)/2+  (width -30)/4+ 10 +"px")
-            .attr("y",  (height -30)/2 + 10 + (height -30)/4 + this.visualSettings.circle.FontValueSize/2+ "px")
+            .attr("x", 2*parmeterW/3 + 3/4*width)
+            .attr("y", 3*height/4  + 2*parmeterH/3 +   this.visualSettings.circle.FontValueSize/2)
             .attr("text-anchor", "middle")
             .style("font-size", this.visualSettings.circle.FontValueSize)
             .style("fill", this.visualSettings.circle.FontValueColor)
             .style("font-family", this.visualSettings.circle.fontFamily)
+        
+
+        this.orgName.text(categoricalDataView.categories[0].values[0].toString())
+        .attr("x", parmeterW/3)
+        .attr("y",parmeterH/2 - parmeterH/8 )
+        .attr("font-size",this.visualSettings.circle.CompanyFontSize)
+        .style("fill", this.visualSettings.circle.FontValueColor)
+
             
             }
             

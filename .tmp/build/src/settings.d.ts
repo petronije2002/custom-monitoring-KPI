@@ -9,6 +9,7 @@ export declare class CircleSettings {
     FontValueSize: number;
     FontValueColor: string;
     fontFamily: string;
+    CompanyFontSize: number;
 }
 export declare class VisualSettings extends DataViewObjectsParser {
     dataPoint: dataPointSettings;

@@ -89,6 +89,16 @@
                         "numeric": true
                     }
                 },
+               
+                "CompanyFontSize": {
+                    "displayName": "CompanyFontSize",
+                    "description": "Set size of values",
+                    "type": {
+                        "numeric": true
+                    }
+                },
+               
+                
                 "FontValueSize": {
                     "displayName": "FontValueSize",
                     "description": "Set size of values",

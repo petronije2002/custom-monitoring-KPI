@@ -10,22 +10,22 @@
 
        
         {
-            "displayName": "Critical Open Events",
+            "displayName": "Critical Open",
             "name": "Cdk",
             "kind": "Measure"
         },
         {
-            "displayName": "Major Open Events",
+            "displayName": "Major Open",
             "name": "Pwm",
             "kind": "Measure"
         },
         {
-            "displayName": "Critical Ackn. Events",
+            "displayName": "Critical Ackn.",
             "name": "Opn",
             "kind": "Measure"
         },
         {
-            "displayName": "Major Ackn. Events",
+            "displayName": "Major Ackn.",
             "name": "Cls",
             "kind": "Measure"
         }
@@ -39,7 +39,7 @@
             "displayName": "Background Colors",
             "properties": {
                 "openBackgroundColor": {
-                    "displayName": "Open Cases Background Color",
+                    "displayName": "Critical Open Background",
                     "description": "The fill color of the circle.",
                     "type": {
                         "fill": {
@@ -50,7 +50,7 @@
                     }
                 },
                 "ClosedBackgroundColor": {
-                    "displayName": "Closed Cases Backg Color",
+                    "displayName": "Major Open Background",
                     "description": "The fill color of the circle.",
                     "type": {
                         "fill": {
@@ -61,7 +61,7 @@
                     }
                 },
                 "AcknBackgroundColor": {
-                    "displayName": "Ackn. Cases Backg Color",
+                    "displayName": "Critical Acknowledged",
                     "description": "The fill color of the circle.",
                     "type": {
                         "fill": {
@@ -72,7 +72,7 @@
                     }
                 },
                 "CriticalBackgroundColor": {
-                    "displayName": "Crit. Cases Backg Color",
+                    "displayName": "Major Acknowledged",
                     "description": "The fill color of the circle.",
                     "type": {
                         "fill": {

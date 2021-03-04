@@ -30,15 +30,15 @@ import { dataViewObjectsParser } from "powerbi-visuals-utils-dataviewutils";
 import DataViewObjectsParser = dataViewObjectsParser.DataViewObjectsParser;
 
 export class CircleSettings {
-  public openBackgroundColor: string = "blue";
-  public ClosedBackgroundColor: string = "white";
-  public AcknBackgroundColor: string = "red";
-  public CriticalBackgroundColor: string = "orange";
+  public criticalOpen: string = "#F76969";
+  public majorOpen: string = "#F6BF52";
+  public criticalAcknowledged: string = "#808080";
+  public majorAcknowledged: string = "#CCCCCC";
 
   public CornerRadius: number = 10;
 
-  public FontValueSize: number = 16;
-  public FontValueColor: string = "black";
+  public FontValueSize: number =24;
+  public FontValueColor: string = "white";
   public fontFamily: string = "\"Segoe UI\", wf_segoe-ui_normal, helvetica, arial, sans-serif"
   public CompanyFontSize: number = 20;
 } 

@@ -46,6 +46,7 @@ import PrimitiveValue = powerbi.PrimitiveValue;
 import { VisualSettings } from "./settings";
 import VisualObjectInstanceEnumeration = powerbi.VisualObjectInstanceEnumeration;
 import EnumerateVisualObjectInstancesOptions = powerbi.EnumerateVisualObjectInstancesOptions;
+import { textMeasurementService } from "powerbi-visuals-utils-formattingutils";
 
 import * as d3 from "d3";
 type Selection<T extends d3.BaseType> = d3.Selection<T, any,any, any>;
@@ -72,10 +73,20 @@ export class Visual implements IVisual {
     private textValue4: Selection<SVGElement>;
     private textLabel4: Selection<SVGElement>;
 
+
+    private textValue5: Selection<SVGElement>;
+
+
     private orgName: Selection<SVGElement>;
 
-    private textValueOpen: Selection<SVGElement>;
-    private textValueAckn: Selection<SVGElement>;
+
+
+    private textMajorOpen: Selection<SVGElement>;
+    private textMajorAcknowledged : Selection<SVGElement>;
+
+    private textCriticalAcknowledged : Selection<SVGElement>;
+    private textCriticaOpen: Selection<SVGElement>;
+    private logo: Selection<SVGImageElement>;
 
 
     private box1: Selection<SVGElement>;
@@ -98,6 +109,12 @@ export class Visual implements IVisual {
         this.box2 = this.container.append("rect").classed('boxed',true)
         this.box3 = this.container.append("rect").classed('boxed',true)
         this.box4 = this.container.append("rect").classed('boxed',true)
+
+        this.logo = this.container.append('image').classed('logo',true)
+
+        
+
+        
 
 
 
@@ -127,7 +144,22 @@ export class Visual implements IVisual {
         this.textLabel4 = this.container.append("text")
             .classed("textLabel2", true);
 
+        this.textValue5 = this.container.append("text")
+            .classed("textLabel2", true);
+
+        this.textMajorOpen = this.container.append('text').classed('mjrOpen',true)
+        this.textMajorAcknowledged = this.container.append('text').classed('mjrAck',true)
+
+        this.textCriticaOpen = this.container.append('text').classed('critOpn',true)
+
+        this.textCriticalAcknowledged = this.container.append('text').classed('critAck1', true)
+
+
+        
+
         this.orgName = this.container.append("text").classed("orgName",true)
+
+        // this.textEventMonitor.append("text").classed("textValue", true);
         
     }
 
@@ -169,7 +201,16 @@ export class Visual implements IVisual {
         .attr("y", 3*parmeterH/4)
         .attr("rx",this.visualSettings.circle.CornerRadius)
         .attr("ry",this.visualSettings.circle.CornerRadius)
-        .style("fill",this.visualSettings.circle.openBackgroundColor).style("fill-opacity","1")
+        .style("fill",this.visualSettings.circle.criticalOpen).style("fill-opacity","1")
+
+        let titleLengthCriticalOpen = textMeasurementService.measureSvgTextWidth( {text: "Critical Open",fontFamily: this.visualSettings.circle.fontFamily.toString(), fontSize: this.visualSettings.circle.FontValueSize.toString()})
+
+        this.textCriticaOpen.text("Critical Open")
+        .attr("x", parmeterW/3 + width/4 - titleLengthCriticalOpen)
+        .attr("y", 3*parmeterH/4 + 50)
+        .style("font-size", this.visualSettings.circle.FontValueSize)
+        .style("fill", this.visualSettings.circle.FontValueColor)
+        .style("font-family", this.visualSettings.circle.fontFamily)
 
         this.box2.attr("width", width/2 )
         .attr("height",height/2)
@@ -177,7 +218,20 @@ export class Visual implements IVisual {
         .attr("y",3*parmeterH/4)
         .attr("rx",this.visualSettings.circle.CornerRadius)
         .attr("ry",this.visualSettings.circle.CornerRadius)
-        .style("fill",this.visualSettings.circle.ClosedBackgroundColor).style("fill-opacity","1")
+        .style("fill",this.visualSettings.circle.majorOpen).style("fill-opacity","1")
+
+
+        let titleLengthMajorOpen = textMeasurementService.measureSvgTextWidth( {text: "Major Open",fontFamily: this.visualSettings.circle.fontFamily.toString(), fontSize: this.visualSettings.circle.FontValueSize.toString()})
+
+        this.textMajorOpen.text("Major Open")
+        .attr("x", width/2 + 2*parmeterW/3 + width/4 - titleLengthMajorOpen)
+        .attr("y", 3*parmeterH/4 + 50)
+        .style("font-size", this.visualSettings.circle.FontValueSize)
+        .style("fill", this.visualSettings.circle.FontValueColor)
+        .style("font-family", this.visualSettings.circle.fontFamily)
+
+
+
 
         this.box3.attr("width", width/2  )
         .attr("height",height/2 )
@@ -185,15 +239,39 @@ export class Visual implements IVisual {
         .attr("y",height/2 + 2*parmeterH/3+parmeterH/4)
         .attr("rx",this.visualSettings.circle.CornerRadius)
         .attr("ry",this.visualSettings.circle.CornerRadius)
-        .style("fill",this.visualSettings.circle.AcknBackgroundColor).style("fill-opacity","1")
+        .style("fill",this.visualSettings.circle.criticalAcknowledged).style("fill-opacity","1")
 
-        this.box4.attr("width", width/2  )
+
+
+        let titleCitiicalAcknowliiged = textMeasurementService.measureSvgTextWidth( {text: "Critical Acknowledged",fontFamily: this.visualSettings.circle.fontFamily.toString(), fontSize: this.visualSettings.circle.FontValueSize.toString()})
+
+        this.textCriticalAcknowledged.text("Critical Acknowledged")
+        .attr("x", parmeterW/3 + width/4 - titleCitiicalAcknowliiged*1.2)
+        .attr("y",height/2 + 2*parmeterH/3+parmeterH/4 + 50) 
+        .style("font-size", this.visualSettings.circle.FontValueSize)
+        .style("fill", this.visualSettings.circle.FontValueColor)
+        .style("font-family", this.visualSettings.circle.fontFamily)
+        
+
+
+
+        this.box4.attr("width", width/2 )
         .attr("height",height/2)
         .attr("x",width/2 + 2*parmeterW/3)
         .attr("y",height/2 + 2*parmeterH/3+parmeterH/4)
         .attr("rx",this.visualSettings.circle.CornerRadius)
         .attr("ry",this.visualSettings.circle.CornerRadius)
-        .style("fill",this.visualSettings.circle.CriticalBackgroundColor).style("fill-opacity","1")
+        .style("fill",this.visualSettings.circle.majorAcknowledged).style("fill-opacity","1")
+
+
+        let titleMajorAcknowleged = textMeasurementService.measureSvgTextWidth( {text: "Major Acknowledged",fontFamily: this.visualSettings.circle.fontFamily.toString(), fontSize: this.visualSettings.circle.FontValueSize.toString()})
+
+        this.textMajorAcknowledged.text("Major Acknowledged")
+        .attr("x",width/2 + 2*parmeterW/3 + width/4 - titleMajorAcknowleged*1.2)
+        .attr("y",height/2 + 2*parmeterH/3+parmeterH/4 + 50)
+        .style("font-size", this.visualSettings.circle.FontValueSize)
+        .style("fill", this.visualSettings.circle.FontValueColor)
+        .style("font-family", this.visualSettings.circle.fontFamily)
 
         let fontSizeValue: number = this.visualSettings.circle.FontValueSize;
         //   Math.min(width, height) / 5;
@@ -206,7 +284,7 @@ export class Visual implements IVisual {
             .attr("y", 5*parmeterH/8 + height/4 + parmeterH/4)
             .attr("text-anchor","middle")
             .attr("dominant-baseline", "middle")
-            .style("font-size", this.visualSettings.circle.FontValueSize)
+            .style("font-size", this.visualSettings.circle.FontValueSize * 2)
             .style("fill", this.visualSettings.circle.FontValueColor)
             .style("font-family", this.visualSettings.circle.fontFamily)
             
@@ -216,7 +294,7 @@ export class Visual implements IVisual {
             .attr("y",  5*parmeterH/8 + height/4+ parmeterH/4)
             .attr("text-anchor","middle")
             .attr("dominant-baseline", "middle")
-            .style("font-size",this.visualSettings.circle.FontValueSize)
+            .style("font-size",this.visualSettings.circle.FontValueSize * 2)
             .style("fill", this.visualSettings.circle.FontValueColor)
             .style("font-family", this.visualSettings.circle.fontFamily)
 
@@ -226,7 +304,7 @@ export class Visual implements IVisual {
             .attr("text-anchor","middle")
             .attr("dominant-baseline", "middle")
             .attr("y", 3*height/4  + 6*parmeterH/8 + parmeterH/4)
-            .style("font-size", this.visualSettings.circle.FontValueSize)
+            .style("font-size", this.visualSettings.circle.FontValueSize * 2)
             .style("fill", this.visualSettings.circle.FontValueColor)
             .style("font-family", this.visualSettings.circle.fontFamily)
 
@@ -236,7 +314,7 @@ export class Visual implements IVisual {
             .attr("text-anchor","middle")
             .attr("dominant-baseline", "middle")
             .attr("y", 3*height/4  + 6*parmeterH/8+ parmeterH/4)
-            .style("font-size", this.visualSettings.circle.FontValueSize)
+            .style("font-size", this.visualSettings.circle.FontValueSize * 2)
             .style("fill", this.visualSettings.circle.FontValueColor)
             .style("font-family", this.visualSettings.circle.fontFamily)
         
@@ -245,8 +323,23 @@ export class Visual implements IVisual {
         .attr("x", "50%")
         .attr("y",parmeterH/2 + parmeterH/4 - parmeterH/8)
         .attr("text-anchor","middle")
-        .attr("font-size",this.visualSettings.circle.CompanyFontSize)
+        .attr("font-size",this.visualSettings.circle.CompanyFontSize *2)
         .style("fill", this.visualSettings.circle.FontValueColor)
+
+
+
+        this.logo
+        .attr("x", 0)
+        .attr("y",0)
+        .attr("width",options.viewport.width/3)
+        .attr('height', parmeterH/2)
+        .attr("href","https://ubuntu16blob.blob.core.windows.net/testhtml/PQR 3250x1500 (1).jpg")
+        
+        this.textValue5.text("Event monitor")
+        .attr("x",options.viewport.width/2 + 70)
+        .attr("y", parmeterH/2 -25)
+        .style("fill","#F76969")
+        .style("font-size", 42)
         
 
             

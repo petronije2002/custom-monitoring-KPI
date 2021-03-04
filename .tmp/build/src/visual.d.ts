@@ -20,9 +20,13 @@ export declare class Visual implements IVisual {
     private textLabel3;
     private textValue4;
     private textLabel4;
+    private textValue5;
     private orgName;
-    private textValueOpen;
-    private textValueAckn;
+    private textMajorOpen;
+    private textMajorAcknowledged;
+    private textCriticalAcknowledged;
+    private textCriticaOpen;
+    private logo;
     private box1;
     private box2;
     private box3;

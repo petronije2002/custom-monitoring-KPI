@@ -206,7 +206,7 @@ export class Visual implements IVisual {
         let titleLengthCriticalOpen = textMeasurementService.measureSvgTextWidth( {text: "Critical Open",fontFamily: this.visualSettings.circle.fontFamily.toString(), fontSize: this.visualSettings.circle.FontValueSize.toString()})
 
         this.textCriticaOpen.text("Critical Open")
-        .attr("x", parmeterW/3 + width/4 - titleLengthCriticalOpen)
+        .attr("x", parmeterW/3 + width/4 - titleLengthCriticalOpen*1.2)
         .attr("y", 3*parmeterH/4 + 50)
         .style("font-size", this.visualSettings.circle.FontValueSize)
         .style("fill", this.visualSettings.circle.FontValueColor)
@@ -224,7 +224,7 @@ export class Visual implements IVisual {
         let titleLengthMajorOpen = textMeasurementService.measureSvgTextWidth( {text: "Major Open",fontFamily: this.visualSettings.circle.fontFamily.toString(), fontSize: this.visualSettings.circle.FontValueSize.toString()})
 
         this.textMajorOpen.text("Major Open")
-        .attr("x", width/2 + 2*parmeterW/3 + width/4 - titleLengthMajorOpen)
+        .attr("x", width/2 + 2*parmeterW/3 + width/4 - titleLengthMajorOpen*1.2)
         .attr("y", 3*parmeterH/4 + 50)
         .style("font-size", this.visualSettings.circle.FontValueSize)
         .style("fill", this.visualSettings.circle.FontValueColor)

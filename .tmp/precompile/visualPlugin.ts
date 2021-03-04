@@ -5,9 +5,9 @@ import VisualConstructorOptions = powerbiVisualsApi.extensibility.visual.VisualC
 var powerbiKey: any = "powerbi";
 var powerbi: any = window[powerbiKey];
 
-var circleCard9536A6DA6E66497FB58724D898B681E0_DEBUG: IVisualPlugin = {
-    name: 'circleCard9536A6DA6E66497FB58724D898B681E0_DEBUG',
-    displayName: 'CircleCard',
+var monitoringKPI9536A6DA6E66497FB58724D898B681E0: IVisualPlugin = {
+    name: 'monitoringKPI9536A6DA6E66497FB58724D898B681E0',
+    displayName: 'monitoringKPII',
     class: 'Visual',
     apiVersion: '2.6.0',
     create: (options: VisualConstructorOptions) => {
@@ -23,7 +23,7 @@ var circleCard9536A6DA6E66497FB58724D898B681E0_DEBUG: IVisualPlugin = {
 if (typeof powerbi !== "undefined") {
     powerbi.visuals = powerbi.visuals || {};
     powerbi.visuals.plugins = powerbi.visuals.plugins || {};
-    powerbi.visuals.plugins["circleCard9536A6DA6E66497FB58724D898B681E0_DEBUG"] = circleCard9536A6DA6E66497FB58724D898B681E0_DEBUG;
+    powerbi.visuals.plugins["monitoringKPI9536A6DA6E66497FB58724D898B681E0"] = monitoringKPI9536A6DA6E66497FB58724D898B681E0;
 }
 
-export default circleCard9536A6DA6E66497FB58724D898B681E0_DEBUG;
+export default monitoringKPI9536A6DA6E66497FB58724D898B681E0;

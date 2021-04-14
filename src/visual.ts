@@ -173,9 +173,35 @@ export class Visual implements IVisual {
 
         let dataView1: DataView = options.dataViews[0];
         let categoricalDataView: DataViewCategorical = dataView1.categorical
+
+
+        
+
+
+
+
+
+        
+
+        //console.log("categorical values: ", categoricalDataView.categories[0].values.indexOf("PQR"),categoricalDataView.categories[0].values.indexOf("Tauw"))
         // let dataView2: DataView= options.dataViews[1];
 
         let values: DataViewValueColumnGroup[] = categoricalDataView.values.grouped();
+
+        let filterValue = values.values().next().value.values[4].values[0]
+
+        console.log("Filter Value", filterValue)
+
+
+        let indexOfFilterValue = categoricalDataView.categories[0].values.indexOf(filterValue)
+
+        // console.log("categorical values: ", categoricalDataView.categories[0].values[indexOfFilterValue])
+
+        let values1: DataViewValueColumnGroup[] = categoricalDataView.values.grouped();
+
+        // console.log("categorical values: ", values1[indexOfFilterValue])
+
+
         // let values = options.dataViews.forEach((el)=>{return el.single.value})
         // let dataView3: DataView = options.dataViews[2];
         // let dataView4: DataView = options.dataViews[3];
@@ -183,7 +209,20 @@ export class Visual implements IVisual {
         // this.visualSettings.colors.circleThickness = Math.max(0, this.visualSettings.circle.circleThickness);
         // this.visualSettings.circle.circleThickness = Math.min(10, this.visualSettings.circle.circleThickness);
 
+        console.log("Check values", values1[indexOfFilterValue].values[0].values.reduce((a,b)=>{return Number(a)+Number(b)},0).toString())
+
+        let _criticalOpen = values1[indexOfFilterValue].values[0].values.reduce((a,b)=>{return Number(a)+Number(b)},0).toString()
+
+        console.log("Check values", values1[indexOfFilterValue].values[1].values.reduce((a,b)=>{return Number(a)+Number(b)},0).toString())
+        let _majorOpen = values1[indexOfFilterValue].values[1].values.reduce((a,b)=>{return Number(a)+Number(b)},0).toString()
         
+        console.log("Check values", values1[indexOfFilterValue].values[2].values.reduce((a,b)=>{return Number(a)+Number(b)},0).toString())
+        let _criticalAck = values1[indexOfFilterValue].values[2].values.reduce((a,b)=>{return Number(a)+Number(b)},0).toString()
+
+        console.log("Check values", values1[indexOfFilterValue].values[3].values.reduce((a,b)=>{return Number(a)+Number(b)},0).toString())
+
+        let _majorAck = values1[indexOfFilterValue].values[3].values.reduce((a,b)=>{return Number(a)+Number(b)},0).toString()
+
         this.visualSettings = VisualSettings.parse<VisualSettings>(dataView1);
         let parmeterH = options.viewport.height/4
         let parmeterW = options.viewport.width/8
@@ -199,35 +238,35 @@ export class Visual implements IVisual {
         .attr("height",height/2)
         .attr("x", parmeterW/3)
         .attr("y", 3*parmeterH/4)
-        .attr("rx",this.visualSettings.circle.CornerRadius)
-        .attr("ry",this.visualSettings.circle.CornerRadius)
+        .attr("rx",this.visualSettings.circle.cornerRadius)
+        .attr("ry",this.visualSettings.circle.cornerRadius)
         .style("fill",this.visualSettings.circle.criticalOpen).style("fill-opacity","1")
 
-        let titleLengthCriticalOpen = textMeasurementService.measureSvgTextWidth( {text: "Critical Open",fontFamily: this.visualSettings.circle.fontFamily.toString(), fontSize: this.visualSettings.circle.FontValueSize.toString()})
+        let titleLengthCriticalOpen = textMeasurementService.measureSvgTextWidth( {text: "Critical Open",fontFamily: this.visualSettings.circle.fontFamily.toString(), fontSize: this.visualSettings.circle.fontValueSize.toString()})
 
         this.textCriticaOpen.text("Critical Open")
         .attr("x", parmeterW/3 + width/4 - titleLengthCriticalOpen*1.2)
         .attr("y", 3*parmeterH/4 + 50)
-        .style("font-size", this.visualSettings.circle.FontValueSize)
-        .style("fill", this.visualSettings.circle.FontValueColor)
+        .style("font-size", this.visualSettings.circle.fontValueSize)
+        .style("fill", this.visualSettings.circle.fontValueColor)
         .style("font-family", this.visualSettings.circle.fontFamily)
 
         this.box2.attr("width", width/2 )
         .attr("height",height/2)
         .attr("x",width/2 + 2*parmeterW/3)
         .attr("y",3*parmeterH/4)
-        .attr("rx",this.visualSettings.circle.CornerRadius)
-        .attr("ry",this.visualSettings.circle.CornerRadius)
+        .attr("rx",this.visualSettings.circle.cornerRadius)
+        .attr("ry",this.visualSettings.circle.cornerRadius)
         .style("fill",this.visualSettings.circle.majorOpen).style("fill-opacity","1")
 
 
-        let titleLengthMajorOpen = textMeasurementService.measureSvgTextWidth( {text: "Major Open",fontFamily: this.visualSettings.circle.fontFamily.toString(), fontSize: this.visualSettings.circle.FontValueSize.toString()})
+        let titleLengthMajorOpen = textMeasurementService.measureSvgTextWidth( {text: "Major Open",fontFamily: this.visualSettings.circle.fontFamily.toString(), fontSize: this.visualSettings.circle.fontValueSize.toString()})
 
         this.textMajorOpen.text("Major Open")
         .attr("x", width/2 + 2*parmeterW/3 + width/4 - titleLengthMajorOpen*1.2)
         .attr("y", 3*parmeterH/4 + 50)
-        .style("font-size", this.visualSettings.circle.FontValueSize)
-        .style("fill", this.visualSettings.circle.FontValueColor)
+        .style("font-size", this.visualSettings.circle.fontValueSize)
+        .style("fill", this.visualSettings.circle.fontValueColor)
         .style("font-family", this.visualSettings.circle.fontFamily)
 
 
@@ -237,19 +276,19 @@ export class Visual implements IVisual {
         .attr("height",height/2 )
         .attr("x",parmeterW/3)
         .attr("y",height/2 + 2*parmeterH/3+parmeterH/4)
-        .attr("rx",this.visualSettings.circle.CornerRadius)
-        .attr("ry",this.visualSettings.circle.CornerRadius)
+        .attr("rx",this.visualSettings.circle.cornerRadius)
+        .attr("ry",this.visualSettings.circle.cornerRadius)
         .style("fill",this.visualSettings.circle.criticalAcknowledged).style("fill-opacity","1")
 
 
 
-        let titleCitiicalAcknowliiged = textMeasurementService.measureSvgTextWidth( {text: "Critical Acknowledged",fontFamily: this.visualSettings.circle.fontFamily.toString(), fontSize: this.visualSettings.circle.FontValueSize.toString()})
+        let titleCitiicalAcknowliiged = textMeasurementService.measureSvgTextWidth( {text: "Critical Acknowledged",fontFamily: this.visualSettings.circle.fontFamily.toString(), fontSize: this.visualSettings.circle.fontValueSize.toString()})
 
         this.textCriticalAcknowledged.text("Critical Acknowledged")
         .attr("x", parmeterW/3 + width/4 - titleCitiicalAcknowliiged*1.2)
         .attr("y",height/2 + 2*parmeterH/3+parmeterH/4 + 50) 
-        .style("font-size", this.visualSettings.circle.FontValueSize)
-        .style("fill", this.visualSettings.circle.FontValueColor)
+        .style("font-size", this.visualSettings.circle.fontValueSize)
+        .style("fill", this.visualSettings.circle.fontValueColor)
         .style("font-family", this.visualSettings.circle.fontFamily)
         
 
@@ -259,72 +298,82 @@ export class Visual implements IVisual {
         .attr("height",height/2)
         .attr("x",width/2 + 2*parmeterW/3)
         .attr("y",height/2 + 2*parmeterH/3+parmeterH/4)
-        .attr("rx",this.visualSettings.circle.CornerRadius)
-        .attr("ry",this.visualSettings.circle.CornerRadius)
+        .attr("rx",this.visualSettings.circle.cornerRadius)
+        .attr("ry",this.visualSettings.circle.cornerRadius)
         .style("fill",this.visualSettings.circle.majorAcknowledged).style("fill-opacity","1")
 
 
-        let titleMajorAcknowleged = textMeasurementService.measureSvgTextWidth( {text: "Major Acknowledged",fontFamily: this.visualSettings.circle.fontFamily.toString(), fontSize: this.visualSettings.circle.FontValueSize.toString()})
+        let titleMajorAcknowleged = textMeasurementService.measureSvgTextWidth( {text: "Major Acknowledged",fontFamily: this.visualSettings.circle.fontFamily.toString(), fontSize: this.visualSettings.circle.fontValueSize.toString()})
 
         this.textMajorAcknowledged.text("Major Acknowledged")
         .attr("x",width/2 + 2*parmeterW/3 + width/4 - titleMajorAcknowleged*1.2)
         .attr("y",height/2 + 2*parmeterH/3+parmeterH/4 + 50)
-        .style("font-size", this.visualSettings.circle.FontValueSize)
-        .style("fill", this.visualSettings.circle.FontValueColor)
+        .style("font-size", this.visualSettings.circle.fontValueSize)
+        .style("fill", this.visualSettings.circle.fontValueColor)
         .style("font-family", this.visualSettings.circle.fontFamily)
 
-        let fontSizeValue: number = this.visualSettings.circle.FontValueSize;
+        let fontSizeValue: number = this.visualSettings.circle.fontValueSize;
         //   Math.min(width, height) / 5;
+
+
+        
 
        
         
         this.textValue1
-            .text(<string>Math.round(Number(dataView1.categorical.values[0].values.reduce((a,b)=>{return Number(a)+Number(b)}))).toString())
+            .text(_criticalOpen)
+
+            // .text(<string>Math.round(Number(dataView1.categorical.values[0].values.reduce((a,b)=>{return Number(a)+Number(b)}))).toString())
             .attr("x", parmeterW/3 + width/4 )
             .attr("y", 5*parmeterH/8 + height/4 + parmeterH/4)
             .attr("text-anchor","middle")
             .attr("dominant-baseline", "middle")
-            .style("font-size", this.visualSettings.circle.FontValueSize * 2)
-            .style("fill", this.visualSettings.circle.FontValueColor)
+            .style("font-size", this.visualSettings.circle.fontValueSize * 2)
+            .style("fill", this.visualSettings.circle.fontValueColor)
             .style("font-family", this.visualSettings.circle.fontFamily)
             
         this.textValue2
-            .text(<string>dataView1.categorical.values[1].values.reduce((a,b)=>{return Number(a)+Number(b)}).toString())
+            .text(_majorOpen)
+            // .text(<string>dataView1.categorical.values[1].values.reduce((a,b)=>{return Number(a)+Number(b)}).toString())
             .attr("x", 2*parmeterW/3 + 3/4*width )
             .attr("y",  5*parmeterH/8 + height/4+ parmeterH/4)
             .attr("text-anchor","middle")
             .attr("dominant-baseline", "middle")
-            .style("font-size",this.visualSettings.circle.FontValueSize * 2)
-            .style("fill", this.visualSettings.circle.FontValueColor)
+            .style("font-size",this.visualSettings.circle.fontValueSize * 2)
+            .style("fill", this.visualSettings.circle.fontValueColor)
             .style("font-family", this.visualSettings.circle.fontFamily)
 
         this.textValue3
-            .text(<string>dataView1.categorical.values[2].values.reduce((a,b)=>{return Number(a)+Number(b)}).toString())
+            .text(_criticalAck)
+            // .text(<string>dataView1.categorical.values[2].values.reduce((a,b)=>{return Number(a)+Number(b)}).toString())
             .attr("x", parmeterW/3 + width/4)
             .attr("text-anchor","middle")
             .attr("dominant-baseline", "middle")
             .attr("y", 3*height/4  + 6*parmeterH/8 + parmeterH/4)
-            .style("font-size", this.visualSettings.circle.FontValueSize * 2)
-            .style("fill", this.visualSettings.circle.FontValueColor)
+            .style("font-size", this.visualSettings.circle.fontValueSize * 2)
+            .style("fill", this.visualSettings.circle.fontValueColor)
             .style("font-family", this.visualSettings.circle.fontFamily)
 
         this.textValue4
-            .text(<string>Math.round(Number(dataView1.categorical.values[3].values.reduce((a,b)=>{return Number(a)+Number(b)}))).toString())
+            .text(_majorAck)
+            // .text(<string>Math.round(Number(dataView1.categorical.values[3].values.reduce((a,b)=>{return Number(a)+Number(b)}))).toString())
             .attr("x",2*parmeterW/3 + 3/4*width )
             .attr("text-anchor","middle")
             .attr("dominant-baseline", "middle")
             .attr("y", 3*height/4  + 6*parmeterH/8+ parmeterH/4)
-            .style("font-size", this.visualSettings.circle.FontValueSize * 2)
-            .style("fill", this.visualSettings.circle.FontValueColor)
+            .style("font-size", this.visualSettings.circle.fontValueSize * 2)
+            .style("fill", this.visualSettings.circle.fontValueColor)
             .style("font-family", this.visualSettings.circle.fontFamily)
         
 
-        this.orgName.text(categoricalDataView.categories[0].values[0].toString())
+        this.orgName
+        .text(filterValue)
+        // .text(categoricalDataView.categories[0].values[0].toString())
         .attr("x", "50%")
         .attr("y",parmeterH/2 + parmeterH/4 - parmeterH/8)
         .attr("text-anchor","middle")
-        .attr("font-size",this.visualSettings.circle.CompanyFontSize *2)
-        .style("fill", this.visualSettings.circle.FontValueColor)
+        .attr("font-size",this.visualSettings.circle.companyFontSize *2)
+        .style("fill", this.visualSettings.circle.fontValueColor)
 
 
 

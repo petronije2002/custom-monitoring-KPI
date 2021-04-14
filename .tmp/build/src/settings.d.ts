@@ -5,11 +5,13 @@ export declare class CircleSettings {
     majorOpen: string;
     criticalAcknowledged: string;
     majorAcknowledged: string;
-    CornerRadius: number;
-    FontValueSize: number;
-    FontValueColor: string;
+    cornerRadius: number;
+    fontValueSize: number;
+    fontValueColor: string;
     fontFamily: string;
-    CompanyFontSize: number;
+    companyFontSize: number;
+}
+export declare class GeneralSettings {
 }
 export declare class VisualSettings extends DataViewObjectsParser {
     dataPoint: dataPointSettings;

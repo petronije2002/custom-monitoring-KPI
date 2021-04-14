@@ -5,9 +5,9 @@ import VisualConstructorOptions = powerbiVisualsApi.extensibility.visual.VisualC
 var powerbiKey: any = "powerbi";
 var powerbi: any = window[powerbiKey];
 
-var monitoringKPI9536A6DA6E66497FB58724D898B681E0: IVisualPlugin = {
-    name: 'monitoringKPI9536A6DA6E66497FB58724D898B681E0',
-    displayName: 'monitoringKPII',
+var testingKPI9536A6DA6E66497FB58724D898B681E0: IVisualPlugin = {
+    name: 'testingKPI9536A6DA6E66497FB58724D898B681E0',
+    displayName: 'monitoringKPI',
     class: 'Visual',
     apiVersion: '2.6.0',
     create: (options: VisualConstructorOptions) => {
@@ -23,7 +23,7 @@ var monitoringKPI9536A6DA6E66497FB58724D898B681E0: IVisualPlugin = {
 if (typeof powerbi !== "undefined") {
     powerbi.visuals = powerbi.visuals || {};
     powerbi.visuals.plugins = powerbi.visuals.plugins || {};
-    powerbi.visuals.plugins["monitoringKPI9536A6DA6E66497FB58724D898B681E0"] = monitoringKPI9536A6DA6E66497FB58724D898B681E0;
+    powerbi.visuals.plugins["testingKPI9536A6DA6E66497FB58724D898B681E0"] = testingKPI9536A6DA6E66497FB58724D898B681E0;
 }
 
-export default monitoringKPI9536A6DA6E66497FB58724D898B681E0;
+export default testingKPI9536A6DA6E66497FB58724D898B681E0;

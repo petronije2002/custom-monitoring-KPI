@@ -35,19 +35,26 @@ export class CircleSettings {
   public criticalAcknowledged: string = "#808080";
   public majorAcknowledged: string = "#CCCCCC";
 
-  public CornerRadius: number = 10;
+  public cornerRadius: number = 10;
 
-  public FontValueSize: number =24;
-  public FontValueColor: string = "white";
+  public fontValueSize: number =24;
+  public fontValueColor: string = "white";
   public fontFamily: string = "\"Segoe UI\", wf_segoe-ui_normal, helvetica, arial, sans-serif"
-  public CompanyFontSize: number = 20;
+  public companyFontSize: number = 20;
 } 
+
+export class GeneralSettings {
+
+   
+}
 
 
 
 export class VisualSettings extends DataViewObjectsParser {
       public dataPoint: dataPointSettings = new dataPointSettings();
       public circle: CircleSettings = new CircleSettings()
+
+
       }
 
     export class dataPointSettings {

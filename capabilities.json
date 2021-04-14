@@ -1,6 +1,8 @@
 {
     "dataRoles": [
 
+        
+
         {
             "displayName": "Company",
             "name": "Company",
@@ -11,22 +13,27 @@
        
         {
             "displayName": "Critical Open",
-            "name": "Cdk",
+            "name": "criticalOpen",
             "kind": "Measure"
         },
         {
             "displayName": "Major Open",
-            "name": "Pwm",
+            "name": "majorOpen",
             "kind": "Measure"
         },
         {
             "displayName": "Critical Ackn.",
-            "name": "Opn",
+            "name": "criticalAcknowledged",
             "kind": "Measure"
         },
         {
             "displayName": "Major Ackn.",
-            "name": "Cls",
+            "name": "majorAcknowledged",
+            "kind": "Measure"
+        },
+        {
+            "displayName": "Category Filter",
+            "name": "categoryFilter",
             "kind": "Measure"
         }
        
@@ -35,10 +42,14 @@
     ],
 
     "objects": {
+
+        
+        
         "circle": {
+            
             "displayName": "Background Colors",
             "properties": {
-                "openBackgroundColor": {
+                "criticalOpen": {
                     "displayName": "Critical Open Background",
                     "description": "The fill color of the circle.",
                     "type": {
@@ -49,7 +60,7 @@
                         }
                     }
                 },
-                "ClosedBackgroundColor": {
+                "majorOpen": {
                     "displayName": "Major Open Background",
                     "description": "The fill color of the circle.",
                     "type": {
@@ -60,7 +71,7 @@
                         }
                     }
                 },
-                "AcknBackgroundColor": {
+                "criticalAcknowledged": {
                     "displayName": "Critical Acknowledged",
                     "description": "The fill color of the circle.",
                     "type": {
@@ -71,7 +82,7 @@
                         }
                     }
                 },
-                "CriticalBackgroundColor": {
+                "majorAcknowledged": {
                     "displayName": "Major Acknowledged",
                     "description": "The fill color of the circle.",
                     "type": {
@@ -84,7 +95,7 @@
                 },
 
                 
-                "CornerRadius": {
+                "cornerRadius": {
                     "displayName": "Corner Radius",
                     "description": "Set the radius corner",
                     "type": {
@@ -92,7 +103,7 @@
                     }
                 },
                
-                "CompanyFontSize": {
+                "companyFontSize": {
                     "displayName": "CompanyFontSize",
                     "description": "Set size of values",
                     "type": {
@@ -101,14 +112,14 @@
                 },
                
                 
-                "FontValueSize": {
+                "fontValueSize": {
                     "displayName": "FontValueSize",
                     "description": "Set size of values",
                     "type": {
                         "numeric": true
                     }
                 },
-                "FontValueColor": {
+                "fontValueColor": {
                     "displayName": "Font Color",
                     "description": "Font Color",
                     "type": {
@@ -119,6 +130,7 @@
                         }
                     }
                 },
+                
                 "fontFamily": {
                     "displayName": "Font family",
                     "type": {
@@ -236,7 +248,7 @@
         
        
         {
-            "conditions": [ { "Company": { "max": 1 }, "Cdk": { "max": 1 } ,"Pwm": { "max": 1 } ,"Opn": { "max": 1 },"Cls": { "max": 1 } }],
+            "conditions": [ { "Company": { "max": 1 }, "criticalOpen": { "max": 1 } ,"majorOpen": { "max": 1 } ,"criticalAcknowledged": { "max": 1 },"majorAcknowledged": { "max": 1 } }],
            
             "categorical": {
                 "categories": {
@@ -245,10 +257,12 @@
                 "values": {
                     "group": {"by": "Company",
                         "select": [
-                            { "bind": { "to": "Cdk" } },
-                            { "bind": { "to": "Pwm" } },
-                            { "bind": { "to": "Opn" } },
-                            { "bind": { "to": "Cls" } }
+                            { "bind": { "to": "criticalOpen" } },
+                            { "bind": { "to": "majorOpen" } },
+                            { "bind": { "to": "criticalAcknowledged" } },
+                            { "bind": { "to": "majorAcknowledged" } },
+                            { "bind": { "to": "categoryFilter" } }
+                           
                         ]
                     }
                 }
